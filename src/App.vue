@@ -1,26 +1,42 @@
+<!-- src/App.vue -->
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" class="explorer">
+    <div class="left-panel">
+      <left-panel @folderSelected="selectFolder" />
+    </div>
+    <div class="right-panel">
+      <right-panel :folderId="selectedFolderId" />
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import LeftPanel from "./components/LeftPanel.vue";
+import RightPanel from "./components/RightPanel.vue";
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  components: { LeftPanel, RightPanel },
+  data() {
+    return {
+      selectedFolderId: null,
+    };
+  },
+  methods: {
+    selectFolder(folderId) {
+      this.selectedFolderId = folderId;
+    },
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.explorer {
+  display: flex;
+}
+
+.left-panel,
+.right-panel {
+  width: 50%;
+  padding: 10px;
 }
 </style>
